@@ -1,0 +1,106 @@
+---
+title: ReDevTools – Extend DevTools With Custom Plugins
+description: ReDevTools extends your devtools with useful utilities like json2ts, jwt decode, tailwind, ...
+permalink: /
+layout: layouts/base
+---
+
+
+<div class="main">
+    <h1>Rapidly extends DevTools with custom plugins without leaving your console</h1>
+
+    <div class="subtitle">
+        DevTools specific plugins to improve the developer experience.
+    </div>
+
+    <div class="mt-8">
+        <img src="assets/img/preview.gif" alt="how redevtools works"/>
+    </div>
+
+    <div class="mt-12">
+        <div>
+            <span class="text-xs">To start, type this code <b>in the devtools console</b>:</span>
+
+            <div class="flex">
+                {% highlight js %}
+                import("//r8s.io")
+                {% endhighlight %}
+                <div class="flex justify-center p-2 flex-col">
+
+                    <button class="bo-button outline sm" 
+                            onclick='copyToClipboard("import(\"//r8s.io\")")'>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                             class="sc-bl-copy">
+                            <path d="M18 6v-6h-18v18h6v6h18v-18h-6zm-12 10h-4v-14h14v4h-10v10zm16 6h-14v-14h14v14z"
+                                  class="sc-bl-copy"></path>
+                        </svg>
+                        Click to copy
+                    </button>
+                    <div class="text-xs text-gray-400" id="copy-text"></div>
+                </div>
+
+            </div>
+
+
+            <div class="text-xs">and unlock
+                <a href="/blog/convert-json-to-typescript-interfaces-from-the-console/"><b>re.json2ts</b></a>
+                and <a href="/blog/jwtdecode-how-to-decode-a-jwt-token-from-the-console/"><b>re.jwtDecode</b></a></div>
+
+
+        </div>
+
+
+        <p>
+            More details in the <a class="inline-block" href="/docs/">docs section</a>
+        </p>
+    </div>
+
+    <script>
+
+        document.addEventListener('scroll', function () {
+            document.documentElement.dataset.scroll = window.scrollY;
+        }, {passive: true});
+
+
+        function fallbackCopyTextToClipboard(text) {
+            var textArea = document.createElement("textarea");
+            textArea.value = text;
+
+            textArea.style.top = "0";
+            textArea.style.left = "0";
+            textArea.style.position = "fixed";
+
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+
+            try {
+                var successful = document.execCommand('copy');
+                var msg = successful ? 'successful' : 'unsuccessful';
+                console.log('Fallback: Copying text command was ' + msg);
+            } catch (err) {
+                console.error('Fallback: Oops, unable to copy', err);
+            }
+
+            document.body.removeChild(textArea);
+        }
+
+        function copyToClipboard(text) {
+            const clip = navigator.clipboard
+            if (!clip) {
+                fallbackCopyTextToClipboard(text);
+                return;
+            }
+            clip.writeText(text).then(function () {
+                console.log('Clipboard: ' + text);
+            }, function (err) {
+                console.error('Could not copy text to clipboard: ', err);
+            });
+            document.querySelector("#copy-text").innerHTML = "Copied text into clipboard. <br>Paste it into your devtools console"
+            setTimeout(()=>{
+                document.querySelector("#copy-text").innerHTML = ""
+            }, 2500)
+        }
+
+    </script>
+</div>

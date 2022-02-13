@@ -1,0 +1,8 @@
+account_id = ""
+name = "rdt"
+type = "webpack"
+workers_dev = true
+site = { bucket = "./public" }
+compatibility_date = "2022-02-12"
+zone_id="7e2fc91d7dac64e533a8e01fbcf004fd"
+route="{http,https}://r8s.io/*"

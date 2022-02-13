@@ -1,0 +1,26 @@
+---
+layout: layouts/base
+---
+
+
+<div class="max-w-screen-lg mx-auto">
+    <a href="/" class="back-to-link">🠔 Back to <img class="h-4" src="/assets/img/favicon.png" alt="ButOpen logo - "/>
+        redevtoools.com</a>
+</div>
+<div class="post-content ">
+    <h1>{{ title }}</h1>
+    <ul class="tags">
+        {%- for tag in tags -%}
+        <li><a href="/tags/{{ tag }}">#{{ tag }}</a></li>
+        {%- endfor -%}
+    </ul>
+    
+    <img src="{{image}}" alt="{{imageAlt}}" class="post-image" />
+    {{ content }}
+    
+    <h2>Like this plugin? Share with the community</h2>
+    <a class="share-twitter" href="https://twitter.com/share/?via=redevtools&text={{title}}&url={{site.host}}{{permalink}}&hashtags={{tags}}" target="_blank">TWITTER</a>
+    <a class="share-reddit" href="http://www.reddit.com/r/webdev/submit?url={{site.host}}{{permalink}}&title={{title}}" target="_blank">REDDIT</a>
+
+    {% include 'partials/mailing-list.html' %}
+</div>

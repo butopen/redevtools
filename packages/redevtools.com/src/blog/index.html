@@ -1,0 +1,34 @@
+---
+title: ReDevTools blog - open source devtools plugins, directly in your console
+description: ReDevTools is a set of open source extensions that you can quickly activate from your console. Like json2ts, or jwtDecode
+permalink: /blog/
+layout: layouts/base
+---
+
+<div>
+    
+    <div class="posts">
+        <h2>ReDevTools blog</h2>
+        <p>Here you can find the latest and the most viewed use cases for each plugin</p>
+
+        {% for post in collections.redevtools %}
+        <a class="post-card" href="{{ post.url | url }}">
+            <img src="{{post.url | url}}{{post.data.image}}"/>
+            <div>
+                <h3>{{ post.data.title }}</h3>
+                <ul class="tags">
+                    {%- for tag in post.data.tags -%}
+                    <li>#{{ tag }}</li>
+                    {%- endfor -%}
+                </ul>
+                <p>
+                    {{post.data.description}}
+                </p>
+
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+
+    {% include 'partials/mailing-list.html' %}
+</div>

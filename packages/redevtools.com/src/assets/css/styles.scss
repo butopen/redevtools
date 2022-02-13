@@ -1,0 +1,133 @@
+
+@import "node_modules/@butopen/design-system/src/index";
+@import "fonts";
+
+:root {
+  --bo-theme-color: #ff5555;
+}
+
+$sm: 640px;
+$md: 768px;
+$lg: 1024px;
+
+
+html {
+  scroll-behavior: smooth;
+}
+
+body, html {
+  font-family: 'Roboto', sans-serif;
+  @apply bg-gradient-to-br from-gray-50 to-white;
+  @extend .use-bo-design-system;
+}
+
+.logo-text {
+  @apply text-2xl text-gray-700 hover:text-gray-800
+}
+
+
+.main, .docs, .posts {
+  @apply bg-white p-8 max-w-3xl mx-auto;
+}
+
+html:not([data-scroll='0']) .bo-header, .bo-header {
+  box-shadow: 0 2px 5px 0 rgb(0 0 0 / 26%);
+}
+
+h1 {
+  @apply font-black;
+  font-family: 'Inter', serif
+}
+
+.subtitle {
+  @apply text-gray-400 text-lg 
+}
+
+a {
+    @apply text-bop
+}
+
+.bo-header {
+  a {
+    @apply opacity-90 hover:opacity-100;
+  }
+}
+
+
+body {
+  @apply flex flex-col;
+  height: 100vh;
+}
+
+.main-root {
+  flex: 1;
+}
+
+
+.sc-bl-copy {
+  width: 20px;
+  height: 20px;
+  padding: 4px;
+  cursor: pointer;
+  opacity: 0.8;
+  fill: currentColor;
+  display: inline;
+}
+
+
+a.post-card {
+  @apply shadow flex hover:no-underline hover:shadow-lg bg-white m-4;
+  img {
+    @apply h-28
+  }
+  
+  .tags {
+    @apply flex flex-wrap text-xs list-none;
+    li {
+      @apply mr-1
+    }
+  }
+  
+  >div {
+    @apply pl-2 flex-1;
+    h3 {
+      @apply m-0 mt-2
+    }
+    p {
+      @apply text-xs m-0 text-gray-500
+    }
+  }
+}
+
+.back-to-link {
+  @apply my-8 block text-gray-400 text-sm opacity-70 hover:opacity-100;
+  img {
+    @apply inline-block ml-1
+  }
+}
+
+.post-content {
+  @apply bg-gradient-to-br from-gray-50 to-white max-w-screen-lg p-8 mx-auto bg-white shadow-lg rounded-md;
+  img:first-child {
+    @apply shadow-xl
+  }
+
+  ul.tags {
+    @apply inline-flex list-none p-0 m-0 text-xs text-gray-400;
+    li {
+      @apply mr-4;
+    }
+  }
+
+}
+
+.share-twitter {
+  @extend .bo-button;
+  background-color: #1b9cea;
+}
+
+.share-reddit {
+  @extend .bo-button;
+  background-color: rgb(255, 69, 0);
+}
+
