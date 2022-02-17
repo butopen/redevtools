@@ -1,11 +1,11 @@
 <script lang="ts">
-    import {popupStore, updateActiveSuggestion} from "../stores/popup.store";
+    import {popupStore} from "../stores/popup.store";
 </script>
 
 <div class="classes-container">
     <ul>
         {#each $popupStore.suggestions as c}
-            <li class:active={_ => updateActiveSuggestion(c)}>{c}</li>
+            <li class:active={$popupStore.activeSuggestion == c}>{c}</li>
         {/each}
     </ul>
 </div>
