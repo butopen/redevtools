@@ -1,5 +1,5 @@
-import {writable} from 'svelte/store';
 import {updateClasses} from "./popup.store";
+import {createStore} from "../shared/store.util";
 
 export interface InspectStore {
     inspectedTarget?: Element
@@ -8,28 +8,23 @@ export interface InspectStore {
     showTwIcon: boolean
 }
 
-let store: InspectStore = {showInspectorOnMouseMove: false, showTwIcon: true}
-export const inspectStore = writable<InspectStore>(store);
-inspectStore.subscribe(s => store = s)
+const {writable, update} = createStore<InspectStore>({showInspectorOnMouseMove: false, showTwIcon: true});
+export const inspectStore = writable
 
 export function updateShowInspectorOnMouseMove(visible: boolean) {
-    inspectStore.set({...store, showInspectorOnMouseMove: visible})
+    update(inspectStore, {showInspectorOnMouseMove: visible})
 }
 
 export function updateShowTailwindIcon(visible: boolean) {
-    inspectStore.set({...store, showTwIcon: visible})
+    update(inspectStore, {showTwIcon: visible})
 }
 
 export function updatePreviewTarget(target: Element) {
-    inspectStore.set({
-        ...store,
-        previewTarget: store.showInspectorOnMouseMove ? target : null
-    })
+    update(inspectStore, (s) => ({previewTarget: s.showInspectorOnMouseMove ? target : null}))
 }
 
 export function updateInspectedTarget(target: Element) {
-    inspectStore.set({
-        ...store,
+    update(inspectStore, {
         showInspectorOnMouseMove: false,
         previewTarget: null,
         inspectedTarget: target
@@ -39,8 +34,5 @@ export function updateInspectedTarget(target: Element) {
 }
 
 export function updateHighlighted(target: Element) {
-    inspectStore.set({
-        ...store,
-        previewTarget: target
-    })
+    update(inspectStore, {previewTarget: target})
 }
