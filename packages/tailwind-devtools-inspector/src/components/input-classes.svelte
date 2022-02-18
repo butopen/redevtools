@@ -14,6 +14,8 @@
     import {inspectStore} from "../stores/inspect.store";
 
     let inputsContainer: HTMLDivElement;
+    let prevSelectionStart = -1
+    let prevSelectionEnd = -1
 
     function updateAllInputSizes() {
         setTimeout(() => {
@@ -21,19 +23,38 @@
                 input.style.width = (input.value.length + 1) + 'ch'
                 if (index == $popupStore.focusedIndex) {
                     input.focus()
+                    console.log("input: ", input)
                 }
             })
         }, 100)
+    }
+
+    function moveToInput(delta: -1 | 1) {
+        const newInputIndex = Math.max(0, $popupStore.focusedIndex + delta)
+        const newInput = inputsContainer?.querySelectorAll("input").item(newInputIndex)
+        updateFocusedIndex(newInputIndex)
+        updateFocusedClass(newInput.value)
     }
 
     function onKeyUp(e: KeyboardEvent) {
         const input = e.target as HTMLInputElement
         if (input.selectionEnd == input.value.length && e.key == " ") {
             updateAddClass()
-        } else if (input.value == "" && e.key == "Backspace") {
+        } else if (input.value == "" && prevSelectionStart == 0 && e.key == "Backspace") {
             updateRemoveClass()
+        } else if (input.selectionStart == 0
+            && prevSelectionStart == 0
+            && e.key == "ArrowLeft") {
+            moveToInput(-1)
+        } else if (input.selectionEnd == input.value.length
+            && prevSelectionEnd == input.value.length
+            && e.key == "ArrowRight") {
+            moveToInput(1)
         }
         updateSuggestions(input.value, e.key);
+        prevSelectionStart = input.selectionStart
+        prevSelectionEnd = input.selectionEnd
+
     }
 
     function onFocus(e: FocusEvent, index: number) {
@@ -41,6 +62,8 @@
         updateFocusedIndex(index)
         updateFocusedClass(input.value)
         updateSuggestions(input.value, "")
+        prevSelectionStart = -1
+        prevSelectionEnd = -1
     }
 
     function copy() {
