@@ -8,8 +8,8 @@ style.appendChild(document.createTextNode(css));
 const head = document.head || document.getElementsByTagName('head')[0]
 head.appendChild(style);
 `
-fs.unlinkSync("./dist/style.css")
-fs.appendFile('./dist/index.js', cssScript, function (err) {
+fs.appendFile('./dist/tailwind.js', cssScript, function (err) {
     if (err) throw err;
     console.log('Saved!');
 });
+fs.unlinkSync("./dist/style.css")

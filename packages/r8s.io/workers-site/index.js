@@ -30,7 +30,12 @@ async function handleEvent(event) {
       }
     }
 
-    options.mapRequestToAsset = req => new Request(`${new URL(req.url).origin}/index.js`, req)
+    options.mapRequestToAsset = req => {
+      let resourceUrl = `${new URL(req.url).origin}/index.js`;
+      if(req.url.indexOf("tailwind") >= 0)
+        resourceUrl = `${new URL(req.url).origin}/tailwind.js`;
+      return new Request(resourceUrl, req)
+    }
     
 
     const page = await getAssetFromKV(event, options)

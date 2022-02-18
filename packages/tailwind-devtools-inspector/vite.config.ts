@@ -16,7 +16,7 @@ export default defineConfig(({command, mode}) => {
                     entry: 'src/main.ts',
                     formats: ['iife'],
                     name: 'r8stwi',
-                    fileName: (format) => `index.js`
+                    fileName: (format) => `tailwind.js`
                 }
 
             },

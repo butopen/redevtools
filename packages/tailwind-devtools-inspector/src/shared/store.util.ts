@@ -1,25 +1,70 @@
-import {readable, Writable, writable} from "svelte/store";
+import {Writable, writable} from "svelte/store";
 
-export function isFunction(functionToCheck) {
-    const getType = {};
+
+function isFunction(functionToCheck) {
+    var getType = {};
     return functionToCheck && getType.toString.call(functionToCheck) === '[object Function]';
 }
 
+function isNode(o) {
+    return (
+        typeof Node === "object" ? o instanceof Node :
+            o && typeof o === "object" && typeof o.nodeType === "number" && typeof o.nodeName === "string"
+    );
+}
+
+function isElement(o) {
+    return (
+        typeof HTMLElement === "object" ? o instanceof HTMLElement : //DOM2
+            o && typeof o === "object" && o !== null && o.nodeType === 1 && typeof o.nodeName === "string"
+    );
+}
+
+function serializer(replacer?, cycleReplacer?) {
+    const stack: any[] = [], keys: any[] = []
+
+    if (cycleReplacer == null) cycleReplacer = function (key, value) {
+        if (stack[0] === value) return "[Circular ~]"
+        return "[Circular ~." + keys.slice(0, stack.indexOf(value)).join(".") + "]"
+    }
+
+    return function (key, value) {
+        if (stack.length > 0) {
+            const thisPos = stack.indexOf(this)
+            ~thisPos ? stack.splice(thisPos + 1) : stack.push(this)
+            ~thisPos ? keys.splice(thisPos, Infinity, key) : keys.push(key)
+            if (~stack.indexOf(value)) value = cycleReplacer.call(this, key, value)
+        } else stack.push(value)
+
+        if (replacer == null) {
+            return value
+        } else {
+            return replacer.call(this, key, value)
+        }
+    }
+}
+
+const logActions = ()=> (window as any).r8sLlogActions
 const stores = new WeakMap()
 
 function update<T>(store: Writable<T>, newPartialStore:Partial<T>)
 function update<T>(store: Writable<T>, action: (prevStore: T) => Partial<T>)
 function update<T>(store: Writable<T>, action: Partial<T> | ((prevStore: T) => Partial<T>)) {
     const prevStore = stores.get(store)
-    const ps = JSON.parse(JSON.stringify(prevStore))
+    
+    let ps;
+    if(logActions())
+    ps = JSON.parse(JSON.stringify(prevStore, serializer()))
     const result = isFunction(action) ? (action as (prevStore: T) => Partial<T>)(prevStore) : action as Partial<T>
     const ns = {
         ...prevStore, ...result
     }
-    const err = new Error();
-    const stack = err.stack;
-    const functionName = stack.split("at ")[2].split(" ")[0]
-    log(functionName, ps, ns)
+    if(logActions()){
+        const err = new Error();
+        const stack = err.stack;
+        const functionName = stack.split("at ")[2].split(" ")[0]
+        log(functionName, ps, ns)
+    }
     store.set(ns)
 }
 

@@ -6,4 +6,4 @@ dist
 node_modules
 /packages/rdt.io/dist/
 /packages/redevtools/
-/packages/rdt.io/workers-site/worker/
+/packages/r8s.io/workers-site/worker/
