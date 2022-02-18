@@ -47,14 +47,13 @@ re.jwtDecode(localStorage.TOKEN)
 
 You can add it to your project (for example only when you're on localhost).
 
-Add it to your main file:
+To enable redevtools in your development environment you can add this snippet into your project:
 
 ```javascript
-import("//r8s.io")
+//env.development
+if(window.location.href.indexOf("localhost") >= 0){
+    document.head.appendChild(document.createElement("script")).src = "//r8s.io"
+} 
+    
 ```
-
-And if you use typescript:
-
-```typescript
-import("//r8s.io")
-```
+That's all.

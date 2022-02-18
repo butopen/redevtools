@@ -8,7 +8,7 @@ export interface InspectStore {
     showTwIcon: boolean
 }
 
-const {writable, update} = createStore<InspectStore>({showInspectorOnMouseMove: false, showTwIcon: true});
+const {writable, update} = createStore<InspectStore>({showInspectorOnMouseMove: false, showTwIcon: false});
 export const inspectStore = writable
 
 export function updateShowInspectorOnMouseMove(visible: boolean) {

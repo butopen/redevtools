@@ -23,7 +23,6 @@
                 input.style.width = (input.value.length + 1) + 'ch'
                 if (index == $popupStore.focusedIndex) {
                     input.focus()
-                    console.log("input: ", input)
                 }
             })
         }, 100)

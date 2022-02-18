@@ -12,7 +12,7 @@
 <div class="classes-container">
     <ul on:mousewheel={e => onWheel(e)}>
         {#each $popupStore.suggestions as c}
-            <li class:active={$popupStore.activeSuggestion == c}  class="hover:bg-blue-50 cursor-pointer" 
+            <li class:active={$popupStore.activeSuggestion == c} class="hover:bg-blue-50 cursor-pointer" 
                 on:click="{e => updateActiveSuggestion(c)}" >{c}</li>
         {/each}
     </ul>
