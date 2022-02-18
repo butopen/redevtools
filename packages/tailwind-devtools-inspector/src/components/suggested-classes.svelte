@@ -1,11 +1,19 @@
 <script lang="ts">
-    import {popupStore} from "../stores/popup.store";
+    import {popupStore, updateActiveSuggestion, updateSuggestions} from "../stores/popup.store";
+    function onWheel(e:WheelEvent){
+        if(e.deltaY < 0){
+            updateSuggestions($popupStore.activeSuggestion, "ArrowUp")
+        } else 
+            updateSuggestions($popupStore.activeSuggestion, "ArrowDown")
+            
+    }
 </script>
 
 <div class="classes-container">
-    <ul>
+    <ul on:mousewheel={e => onWheel(e)}>
         {#each $popupStore.suggestions as c}
-            <li class:active={$popupStore.activeSuggestion == c}>{c}</li>
+            <li class:active={$popupStore.activeSuggestion == c}  class="hover:bg-blue-50 cursor-pointer" 
+                on:click="{e => updateActiveSuggestion(c)}" >{c}</li>
         {/each}
     </ul>
 </div>
