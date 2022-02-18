@@ -9,14 +9,16 @@
     let tw: HTMLDivElement;
 
     const onMousemove = debounce((e: MouseEvent) => {
-        const inside = tw.contains(e.target as any) || tw == e.target
-        if (!inside && !$inspectStore.previewTarget) {
-            lastTarget = findLastTarget(e) ?? lastTarget
-            if(lastTarget && lastTarget != tw && !tw.contains(lastTarget)){
-                const box = lastTarget?.getBoundingClientRect()
-                if (box && tw) {
-                    tw.style.top = (box.top - 4) + 'px'
-                    tw.style.left = (box.left + box.width - 4) + 'px'
+        if(!$inspectStore.inspectedTarget){
+            const inside = tw.contains(e.target as any) || tw == e.target
+            if (!inside && !$inspectStore.previewTarget) {
+                lastTarget = findLastTarget(e) ?? lastTarget
+                if(lastTarget && lastTarget != tw && !tw.contains(lastTarget)){
+                    const box = lastTarget?.getBoundingClientRect()
+                    if (box && tw) {
+                        tw.style.top = (box.top - 4) + 'px'
+                        tw.style.left = (box.left + box.width - 4) + 'px'
+                    }
                 }
             }
         }
