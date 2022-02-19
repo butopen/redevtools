@@ -29,8 +29,9 @@
     }
 
     function moveToInput(delta: -1 | 1) {
-        const newInputIndex = Math.max(0, $popupStore.focusedIndex + delta)
-        const newInput = inputsContainer?.querySelectorAll("input").item(newInputIndex)
+        const allInputs = inputsContainer?.querySelectorAll("input")
+        const newInputIndex = Math.max(0, Math.min($popupStore.focusedIndex + delta, allInputs.length - 1))
+        const newInput = allInputs.item(newInputIndex)
         updateFocusedIndex(newInputIndex)
         updateFocusedClass(newInput.value)
     }
