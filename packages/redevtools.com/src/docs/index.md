@@ -10,7 +10,7 @@ layout: layouts/doc
 ReDevTools is a simple script maintained by the open source ButOpen community.
 
 It is built from `index.ts` at [https://github.com/redevtools/redevtools](https://github.com/redevtools/redevtools) 
-Feel free to inspect it at [r8s](https://r8s) and the source 
+Feel free to inspect it at [r8s](https://r8s.io) and the source 
 is available at [https://github.com/butopen/redevtools](https://github.com/butopen/redevtools) 
 
 ## Use it from the console
@@ -26,6 +26,15 @@ and you're done.
 
 ## Available plugins
 Extends the browser devtools with custom plugins directly from your localhost.
+
+
+#### tailwind devtools inspector - Edit tailwind classes in seconds
+See [https://www.redevtools.com/blog/tailwind-devtools-inspector-how-to-quickly-edit-tailwind-classes-and-apply-tailwind-templates/](https://www.redevtools.com/blog/tailwind-devtools-inspector-how-to-quickly-edit-tailwind-classes-and-apply-tailwind-templates/)
+
+
+```javascript
+re.tailwind()
+```
 
 #### json2ts - Transform an object to a TypeScript interface
 

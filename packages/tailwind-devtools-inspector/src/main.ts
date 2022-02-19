@@ -24,6 +24,7 @@ window.r8sTailwindInspector = {
 loadTailwindScript()
 
 
+
 const app = new App({
     target: document.getElementById('r8s-tailwind')
 })
