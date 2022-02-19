@@ -1,5 +1,5 @@
-const baseClasses = ['text', "bg", "border", 'w', 'h', 'p', 'm', 'font', 'cursor',"ml", "mr", "mt", "mb", "pr", "pl", "pb", "pt", "mx", "my", "px", "py"]
- 
+const baseClasses = ['text', "bg", "border", 'w', 'h', 'p', 'm', 'font', 'cursor', "ml", "mr", "mt", "mb", "pr", "pl", "pb", "pt", "mx", "my", "px", "py"]
+const sizeClasses = ["w", "h", "p", "m", "ml", "mr", "mt", "mb", "pr", "pl", "pb", "pt", "mx", "my", "px", "py"]
 const borderCorners = ["r", "t", "l", "b"]
 const lcr = ["left", "center", "right"]
 const marginSizes = ["0", "0.5", "1", "1.5", "2", "2.5", "3", "3.5", "4", "5", "6", "7", "8", "9", "10", "11", "12", "14", "16", "20", "24", "28", "32", "36", "40", "44", "48", "52", "56", "60", "64", "72", "80", "96", "auto", "px", "1/2", "1/3", "2/3", "1/4", "2/4", "3/4", "1/5", "2/5", "3/5", "4/5", "1/6", "2/6", "3/6", "4/6", "5/6", "1/12", "2/12", "3/12", "4/12", "5/12", "6/12", "7/12", "8/12", "9/12", "10/12", "11/12"]
@@ -16,12 +16,12 @@ export class Suggester {
         const prefix = this.prefix(text);
         const className = this.removePrefix(text, prefix)
         let suggested = []
-        if ( className == '') {
+        if (className == '') {
             suggested = baseClasses
         } else {
             suggested = this.classesFor(className)
         }
-        return suggested.map(c => (prefix? prefix + ":" : "") + c)
+        return suggested.map(c => (prefix ? prefix + ":" : "") + c)
     }
 
     protected removePrefix(c: string, prefix: string) {
@@ -68,16 +68,12 @@ export class Suggester {
             else if (!t2) {
                 suggestedClasses = starting(colors, t1).map(t0ClassWithDash)
             }
-        } else if (["w", "h", "p", "m"].includes(t0)) {
+        } else if (sizeClasses.includes(t0)) {
             suggestedClasses = marginSizes.map(t0Class)
         } else if (t0 == "rounded") {
-            if (!t1) {
-                suggestedClasses = [...sizes.map(t0Class)]
-            }
+            suggestedClasses = [...sizes.map(t0Class)]
         } else if (t0 == "opacity") {
-            if (!t1) {
-                suggestedClasses = [...opacitySizes.map(t0Class)]
-            }
+            suggestedClasses = [...opacitySizes.map(t0Class)]
         }
 
         return suggestedClasses
