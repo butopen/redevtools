@@ -35,12 +35,12 @@ Chrome does a great job at editing styles and elements and seeing changes live i
 Unfortunately, when using Tailwind, you have classes with fixed colors and sizes
 and it’s difficult to edit them from the Style Element Panel. The style panel is designed
 to edit CSS rules rather than “class rules”:
-
+ 
 ![Infinite color values vs Tailwind discrete values - Chrome CSS inspector VS Tailwind](Infinite-color-values-vs-Tailwind-discrete-values-1024x676.png)
 
 We need a tool to work with discrete values.
 
-Tailwind Devtools Inspector is an extension that lets you solve these problems.
+Tailwind Devtools Inspector is an extension that lets you solve this problem.
 
 And best of all, it is **available from your console without installing anything**
 
