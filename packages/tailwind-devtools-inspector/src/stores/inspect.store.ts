@@ -31,6 +31,8 @@ export function updateInspectedTarget(target: Element) {
     })
     if (target){
         const classes = (target.getAttribute("class") ?? '').split(" ")
+        if(classes.length == 0)
+            classes.push("")
         updateClasses(classes)
     }
 }
