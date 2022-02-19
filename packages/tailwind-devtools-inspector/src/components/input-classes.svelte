@@ -20,12 +20,12 @@
     function updateAllInputSizes() {
         setTimeout(() => {
             inputsContainer?.querySelectorAll("input").forEach((input: HTMLInputElement, index: number) => {
-                input.style.width = (input.value.length + 1) + 'ch'
+                input.style.width = Math.max(2,input.value.length + 1) + 'ch'
                 if (index == $popupStore.focusedIndex) {
                     input.focus()
                 }
             })
-        }, 100)
+        }, 200)
     }
 
     function moveToInput(delta: -1 | 1) {
@@ -74,7 +74,7 @@
         updateAllInputSizes()
         const inspected = $inspectStore.inspectedTarget
         if (inspected) {
-            inspected.className = $popupStore.classes.join(" ")
+            inspected.setAttribute("class", $popupStore.classes.join(" "))
         }
     })
 
@@ -83,7 +83,7 @@
 
 <div class="inputs-container" bind:this={inputsContainer}>
     {#each $popupStore.classes as c, i}
-        <input class="input-class focus:font-bold hover:font-bold" bind:value={c}
+        <input class="input-class focus:font-bold hover:font-bold focus:bg-white" bind:value={c}
                on:keyup={e => onKeyUp(e)}
                on:focus={e => onFocus(e, i)}
         />
