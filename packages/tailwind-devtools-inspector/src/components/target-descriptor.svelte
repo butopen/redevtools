@@ -6,7 +6,8 @@
 
     inspectStore.subscribe(() => {
         targetTag = $inspectStore.previewTarget?.tagName.toLowerCase()
-        targetClasses = $inspectStore.previewTarget?.className.split(" ").map(c => "." + c).join("")
+        const classes = ($inspectStore.previewTarget?.getAttribute("class") ?? '')
+        targetClasses = classes.split(" ").map(c => "." + c).join("")
     })
 
 </script>

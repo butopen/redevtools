@@ -29,8 +29,10 @@ export function updateInspectedTarget(target: Element) {
         previewTarget: null,
         inspectedTarget: target
     })
-    if (target)
-        updateClasses(target.className.split(" "))
+    if (target){
+        const classes = (target.getAttribute("class") ?? '').split(" ")
+        updateClasses(classes)
+    }
 }
 
 export function updateHighlighted(target: Element) {
