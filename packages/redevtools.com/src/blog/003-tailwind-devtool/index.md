@@ -30,7 +30,17 @@ Tailwind is a great technology, but it can be difficult to approach it for the f
 - Chrome does not suggest Tailwind classes
 - Remembering them can be difficult
 
-Tailwind Devtools Inspector is an extension that lets you solve these two problems.
+### The problem with Tailwind and Chrome
+Chrome does a great job at editing styles and elements and seeing changes live in your browser.
+Unfortunately, when using Tailwind, you have classes with fixed colors and sizes
+and it’s difficult to edit them from the Style Element Panel. The style panel is designed
+to edit CSS rules rather than “class rules”:
+
+![Infinite color values vs Tailwind discrete values - Chrome CSS inspector VS Tailwind](Infinite-color-values-vs-Tailwind-discrete-values-1024x676.png)
+
+We need a tool to work with discrete values.
+
+Tailwind Devtools Inspector is an extension that lets you solve these problems.
 
 And best of all, it is **available from your console without installing anything**
 
@@ -64,7 +74,7 @@ If you are a mouse gui and don't like using the `ALT + t` / `Opt + t` hotkey, th
 There is a quicker **always on mode**: type:
 
 ```javascript
-r8sTailwindInspector.enableTwIcon()
+re.tailwind() // enable/disable always on mode
 ```
 
 and you'll see a small little icon close to any element to quick edit it without using the keyboard.
@@ -72,17 +82,6 @@ and you'll see a small little icon close to any element to quick edit it without
 ![Tailwind devtools always on mode](tailwind-devtools-always-on-mode.gif)
 
 It may seem disturbing at the beginning, but you'll love it after few minutes!
-
-## The problem with Tailwind and Chrome
-Chrome does a great job at editing styles and elements and seeing changes live in your browser. 
-Unfortunately, when using Tailwind, you have classes with fixed colors and sizes 
-and it’s difficult to edit them from the Style Element Panel. The style panel is designed 
-to edit CSS rules rather than “class rules”:
-
-![Chrome CSS inspector VS Tailwind](Infinite-color-values-vs-Tailwind-discrete-values-1024x676.png)
-
-Infinite color values vs Tailwind discrete values
-We need a tool to work with discrete values.
 
 ## The Tailwind Devtools Inspector main features
 So here we are: a tool into your console to speed up your work with Tailwind.
