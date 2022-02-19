@@ -6,6 +6,10 @@
   --bo-theme-color: #ff5555;
 }
 
+.main-color {
+  color: var(--bo-theme-color)  
+}
+
 $sm: 640px;
 $md: 768px;
 $lg: 1024px;
@@ -17,7 +21,7 @@ html {
 
 body, html {
   font-family: 'Roboto', sans-serif;
-  @apply bg-gradient-to-br from-gray-50 to-white;
+  //@apply bg-gradient-to-br from-gray-50 to-white;
   @extend .use-bo-design-system;
 }
 
@@ -27,7 +31,7 @@ body, html {
 
 
 .main, .docs, .posts {
-  @apply bg-white p-8 max-w-3xl mx-auto;
+  @apply bg-white p-8 max-w-4xl mx-auto;
 }
 
 html:not([data-scroll='0']) .bo-header, .bo-header {
@@ -50,6 +54,9 @@ a {
 .bo-header {
   a {
     @apply opacity-90 hover:opacity-100;
+  }
+  .bo-header-container {
+    @apply max-w-4xl
   }
 }
 
