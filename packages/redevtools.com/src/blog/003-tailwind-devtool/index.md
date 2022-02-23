@@ -47,7 +47,7 @@ And best of all, it is **available from your console without installing anything
 ## Quick Install
 Tailwind devtools Inspector can be accessed from your console.
 
-It is part of redevtools, so you don't have to install anything: just type: 
+It is part of redevtools, so you don't have to install anything: just type this snippet in your console: 
 
 ```javascript
 import("//r8s.io")
@@ -57,7 +57,7 @@ and you're ready.
 
 To enable the inspector you can type `ALT + t` (or `Opt + t` on a MAC).
 
-Remember: to enable redevtools you just have to type `import("//r8s.io")`, but if you want it already available, 
+Remember: to enable redevtools you just have to type `import("//r8s.io")` in your console, but if you want it already available at page startup, 
 then add this snippet into your project:
 
 ```javascript
