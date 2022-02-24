@@ -31,4 +31,13 @@
   @tailwind base;
   @tailwind components;
   @tailwind utilities;
+  
+  #r8s- tailwind-iframe {
+    position: fixed;
+    top: calc(100% - 1px);
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    border: 0;
+  }
 </style>

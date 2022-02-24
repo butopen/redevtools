@@ -38,7 +38,7 @@ html:not([data-scroll='0']) .bo-header, .bo-header {
   box-shadow: 0 2px 5px 0 rgb(0 0 0 / 26%);
 }
 
-h1 {
+h1,.logo {
   @apply font-black;
   font-family: 'Inter', serif
 }

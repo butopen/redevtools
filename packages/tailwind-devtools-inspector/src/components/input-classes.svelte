@@ -12,6 +12,7 @@
         updateSuggestions
     } from "../stores/popup.store";
     import {inspectStore} from "../stores/inspect.store";
+    import {tailwindSandbox} from "../services/sandobx-iframe.service";
 
     let inputsContainer: HTMLDivElement;
     let prevSelectionStart = -1
@@ -20,7 +21,7 @@
     function updateAllInputSizes() {
         setTimeout(() => {
             inputsContainer?.querySelectorAll("input").forEach((input: HTMLInputElement, index: number) => {
-                input.style.width = Math.max(2,input.value.length + 1) + 'ch'
+                input.style.width = Math.max(2, input.value.length + 1) + 'ch'
                 if (index == $popupStore.focusedIndex) {
                     input.focus()
                 }
@@ -74,6 +75,8 @@
         updateAllInputSizes()
         const inspected = $inspectStore.inspectedTarget
         if (inspected) {
+            for (let c of $popupStore.classes)
+                tailwindSandbox.add(c)
             inspected.setAttribute("class", $popupStore.classes.join(" "))
         }
     })
