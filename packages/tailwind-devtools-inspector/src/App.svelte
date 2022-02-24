@@ -28,16 +28,12 @@
 {/if}
 
 <style global lang="scss">
-  @tailwind base;
-  @tailwind components;
-  @tailwind utilities;
   
-  #r8s- tailwind-iframe {
-    position: fixed;
-    top: calc(100% - 1px);
-    width: 1px;
-    height: 1px;
-    opacity: 0;
-    border: 0;
+  #r8s-tailwind {
+      @tailwind base;
+      @tailwind components;
+      @tailwind utilities;
   }
+  
 </style>
+

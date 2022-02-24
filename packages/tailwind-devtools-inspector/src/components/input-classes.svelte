@@ -21,7 +21,7 @@
     function updateAllInputSizes() {
         setTimeout(() => {
             inputsContainer?.querySelectorAll("input").forEach((input: HTMLInputElement, index: number) => {
-                input.style.width = Math.max(2, input.value.length + 1) + 'ch'
+                input.style.width = ((input.value.length + 1) * 8) + "px"
                 if (index == $popupStore.focusedIndex) {
                     input.focus()
                 }
@@ -99,6 +99,7 @@
               stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
 
+
 </div>
 <SuggestedClasses></SuggestedClasses>
 
@@ -112,6 +113,7 @@
   .inputs-container {
     @apply flex items-center
   }
+
 
 
 </style>

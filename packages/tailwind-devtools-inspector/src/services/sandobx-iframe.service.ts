@@ -8,21 +8,20 @@ interface TailwindAction {
 class TailwindSandbox {
 
     iframe: HTMLIFrameElement
-    
+
     content = ""
 
     constructor() {
         const style = document.createElement('style');
         style.type = 'text/css';
         document.getElementsByTagName('head')[0].appendChild(style);
+
         
-        window.onmessage =  (e) => {
+        window.onmessage = (e) => {
             try {
-                console.log("const: ",e)
                 const r = JSON.parse(e.data)
                 if (r.action == "rule") {
-                    if(this.content.indexOf(r.content) < 0){
-                        console.log("content: ",this.content)
+                    if (this.content.indexOf(r.content) < 0) {
                         this.content += `
                         ${r.content}
                         `
@@ -30,7 +29,7 @@ class TailwindSandbox {
                     }
                 }
             } catch (e) {
-                console.log(e)
+                //ignore
             }
         };
     }
@@ -51,10 +50,20 @@ export function loadTailwind() {
     if (!alreadyPresent) {
         const iframe = document.createElement('iframe');
         iframe.id = iframeId
+        iframe.style.cssText = `
+        position: fixed;
+        top: calc(100% - 1px);
+        width: 1px;
+        height: 1px;
+        opacity: 0;
+        border: 0;`
         tailwindSandbox.iframe = iframe
         const html = `
 <head>
 <script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {important: true}
+</script>
 <script>
 
 function getStyleRules(selector) {
@@ -76,28 +85,34 @@ function getStyleRules(selector) {
 window.onmessage = function(e) {
     
     
-    
-    const request = JSON.parse(e.data)
-    if(request.action == "add"){
-        const selector = "."+request.className
-        const found = document.querySelector(selector)
-        if(!found){
-            const div = document.createElement("div")
-            div.className = request.className
-            document.body.appendChild(div)
-            setTimeout( function(){
-                window.top.postMessage(JSON.stringify({action: "rule", content: getStyleRules(selector)}), '*')
-            },5)
-        }
+    try{
         
-    }
-    else if(request.action == "remove"){
-        const found = document.querySelector("."+request.className)
-        if(found){
-            document.body.removeChild(found)
+        const request = JSON.parse(e.data)
+        if(request.className){
+            if(request.action == "add"){
+                const selector = "."+request.className
+                const found = document.querySelector(selector)
+                if(!found){
+                    const div = document.createElement("div")
+                    div.className = request.className
+                    document.body.appendChild(div)
+                    setTimeout( function(){
+                        window.top.postMessage(JSON.stringify({action: "rule", content: getStyleRules(selector)}), '*')
+                    },5)
+                }
+                
+            }
+            else if(request.action == "remove"){
+                const found = document.querySelector("."+request.className)
+                if(found){
+                    document.body.removeChild(found)
+                }
+            }
+            
         }
+    } catch {
+        //ignore
     }
-    
 };
 
 </script>
