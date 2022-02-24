@@ -1,0 +1,9 @@
+{
+  "name": "r8s.io",
+  "version": "1.0.0",
+  "dependencies": {
+  },
+  "scripts": {
+    "publish": "wrangler publish"
+  }
+}
