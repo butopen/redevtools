@@ -1,4 +1,4 @@
-<script lang='ts'>
+<script lang="ts">
   import { classesStore, updateActiveSuggestion, updateSuggestions } from './classes.store';
 
   function onWheel(e: WheelEvent) {
@@ -8,12 +8,12 @@
   }
 </script>
 
-<div class='classes-container'>
+<div class="classes-container">
   <ul on:mousewheel={(e) => onWheel(e)}>
     {#each $classesStore.suggestions as c}
       <li
         class:active={$classesStore.activeSuggestion == c}
-        class='cursor-pointer hover:bg-blue-50'
+        class="cursor-pointer hover:bg-blue-50"
         on:click={(e) => updateActiveSuggestion(c)}>
         {c}
       </li>
@@ -21,7 +21,7 @@
   </ul>
 </div>
 
-<style lang='scss'>
+<style lang="scss">
   .classes-container {
     ul {
       @apply list-none;

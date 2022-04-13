@@ -1,4 +1,4 @@
-<script lang='ts'>
+<script lang="ts">
   import SuggestedClasses from './suggested-classes.svelte';
   import { copyToClipboard } from '../shared/clipboard.util';
   import {
@@ -73,38 +73,38 @@
   });
 </script>
 
-<div class='inputs-container' bind:this={inputsContainer}>
+<div class="inputs-container" bind:this={inputsContainer}>
   {#each $classesStore.classes as c, i}
     <input
-      class='input-class hover:font-bold focus:bg-white focus:font-bold'
+      class="input-class hover:font-bold focus:bg-white focus:font-bold"
       bind:value={c}
       on:keyup={(e) => onKeyUp(e)}
       on:focus={(e) => onFocus(e, i)} />
   {/each}
   <svg
     on:click={copy}
-    class='h-6 w-6 cursor-pointer text-blue-400 hover:text-blue-600'
-    width='24'
-    height='24'
-    stroke-width='1.5'
-    viewBox='0 0 24 24'
-    fill='none'
-    xmlns='http://www.w3.org/2000/svg'>
+    class="h-6 w-6 cursor-pointer text-blue-400 hover:text-blue-600"
+    width="24"
+    height="24"
+    stroke-width="1.5"
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg">
     <path
-      d='M19.4 20H9.6C9.26863 20 9 19.7314 9 19.4V9.6C9 9.26863 9.26863 9 9.6 9H19.4C19.7314 9 20 9.26863 20 9.6V19.4C20 19.7314 19.7314 20 19.4 20Z'
-      stroke='currentColor'
-      stroke-linecap='round'
-      stroke-linejoin='round' />
+      d="M19.4 20H9.6C9.26863 20 9 19.7314 9 19.4V9.6C9 9.26863 9.26863 9 9.6 9H19.4C19.7314 9 20 9.26863 20 9.6V19.4C20 19.7314 19.7314 20 19.4 20Z"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round" />
     <path
-      d='M15 9V4.6C15 4.26863 14.7314 4 14.4 4H4.6C4.26863 4 4 4.26863 4 4.6V14.4C4 14.7314 4.26863 15 4.6 15H9'
-      stroke='currentColor'
-      stroke-linecap='round'
-      stroke-linejoin='round' />
+      d="M15 9V4.6C15 4.26863 14.7314 4 14.4 4H4.6C4.26863 4 4 4.26863 4 4.6V14.4C4 14.7314 4.26863 15 4.6 15H9"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round" />
   </svg>
 </div>
 <SuggestedClasses />
 
-<style lang='scss'>
+<style lang="scss">
   .input-class {
     @apply inline-block h-3 rounded-sm border-0 bg-transparent text-center
     font-mono text-xs leading-3 text-violet-500 outline-0;

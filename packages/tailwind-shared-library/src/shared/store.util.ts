@@ -1,8 +1,6 @@
 import { Writable, writable } from 'svelte/store';
 
-(window as any).svelteLogStores = window.location.href.startsWith(
-  'http://localhost:3001'
-);
+(window as any).svelteLogStores = window.location.href.startsWith('http://localhost:3001');
 
 type EnhancedWritable<X> = Writable<X> & {
   update: (action: Partial<X> | ((prevStore: X) => Partial<X>)) => void;
@@ -10,35 +8,25 @@ type EnhancedWritable<X> = Writable<X> & {
 
 export function loggedWritable<T>(initialStore: T) {
   const { writable, update } = createStore<T>(initialStore);
-  writable.update = (newState: Partial<T> | ((prevStore: T) => Partial<T>)) =>
-    update(writable, newState as any);
+  writable.update = (newState: Partial<T> | ((prevStore: T) => Partial<T>)) => update(writable, newState as any);
   return writable as EnhancedWritable<T>;
 }
 
 function isFunction(functionToCheck) {
   var getType = {};
-  return (
-    functionToCheck && getType.toString.call(functionToCheck) === '[object Function]'
-  );
+  return functionToCheck && getType.toString.call(functionToCheck) === '[object Function]';
 }
 
 function isNode(o) {
   return typeof Node === 'object'
     ? o instanceof Node
-    : o &&
-    typeof o === 'object' &&
-    typeof o.nodeType === 'number' &&
-    typeof o.nodeName === 'string';
+    : o && typeof o === 'object' && typeof o.nodeType === 'number' && typeof o.nodeName === 'string';
 }
 
 function isElement(o) {
   return typeof HTMLElement === 'object'
     ? o instanceof HTMLElement //DOM2
-    : o &&
-    typeof o === 'object' &&
-    o !== null &&
-    o.nodeType === 1 &&
-    typeof o.nodeName === 'string';
+    : o && typeof o === 'object' && o !== null && o.nodeType === 1 && typeof o.nodeName === 'string';
 }
 
 function serializer(replacer?, cycleReplacer?) {
@@ -46,12 +34,12 @@ function serializer(replacer?, cycleReplacer?) {
     keys: any[] = [];
 
   if (cycleReplacer == null)
-    cycleReplacer = function(key, value) {
+    cycleReplacer = function (key, value) {
       if (stack[0] === value) return '[Circular ~]';
       return '[Circular ~.' + keys.slice(0, stack.indexOf(value)).join('.') + ']';
     };
 
-  return function(key, value) {
+  return function (key, value) {
     if (stack.length > 0) {
       const thisPos = stack.indexOf(this);
       ~thisPos ? stack.splice(thisPos + 1) : stack.push(this);
@@ -72,17 +60,12 @@ const stores = new WeakMap();
 
 function update<T>(store: Writable<T>, newPartialStore: Partial<T>);
 function update<T>(store: Writable<T>, action: (prevStore: T) => Partial<T>);
-function update<T>(
-  store: Writable<T>,
-  action: Partial<T> | ((prevStore: T) => Partial<T>)
-) {
+function update<T>(store: Writable<T>, action: Partial<T> | ((prevStore: T) => Partial<T>)) {
   const prevStore = stores.get(store);
 
   let ps;
   if (logActions()) ps = JSON.parse(JSON.stringify(prevStore, serializer()));
-  const result = isFunction(action)
-    ? (action as (prevStore: T) => Partial<T>)(prevStore)
-    : (action as Partial<T>);
+  const result = isFunction(action) ? (action as (prevStore: T) => Partial<T>)(prevStore) : (action as Partial<T>);
   const ns = {
     ...prevStore,
     ...result
@@ -107,12 +90,7 @@ export function createStore<T>(initialStore: T) {
   return { store: prevStore, writable: writableStore, update };
 }
 
-function log<T>(
-  functionName: string,
-  newPartial: Partial<T>,
-  prevState: T,
-  nextState: T
-) {
+function log<T>(functionName: string, newPartial: Partial<T>, prevState: T, nextState: T) {
   console.groupCollapsed(functionName, newPartial);
   console.log('PREV STATE', prevState);
   console.log('NEXT STATE', nextState);

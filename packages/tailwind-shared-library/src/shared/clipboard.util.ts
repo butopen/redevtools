@@ -27,9 +27,12 @@ export function copyToClipboard(text: string) {
     fallbackCopyTextToClipboard(text);
     return;
   }
-  clip.writeText(text).then(function() {
-    console.log('Clipboard set to: ' + text);
-  }, function(err) {
-    console.error('Could not copy text to clipboard: ', err);
-  });
+  clip.writeText(text).then(
+    function () {
+      console.log('Clipboard set to: ' + text);
+    },
+    function (err) {
+      console.error('Could not copy text to clipboard: ', err);
+    }
+  );
 }

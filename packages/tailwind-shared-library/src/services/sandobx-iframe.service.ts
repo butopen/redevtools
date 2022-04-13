@@ -6,7 +6,6 @@ interface TailwindAction {
 }
 
 class TailwindSandbox {
-
   iframe: HTMLIFrameElement;
 
   content = '';
@@ -15,7 +14,6 @@ class TailwindSandbox {
     const style = document.createElement('style');
     style.type = 'text/css';
     document.getElementsByTagName('head')[0].appendChild(style);
-
 
     window.onmessage = (e) => {
       try {
@@ -35,10 +33,13 @@ class TailwindSandbox {
   }
 
   add(className: string) {
-    this.iframe?.contentWindow.postMessage(JSON.stringify({
-      action: 'add',
-      className
-    }), '*');
+    this.iframe?.contentWindow.postMessage(
+      JSON.stringify({
+        action: 'add',
+        className
+      }),
+      '*'
+    );
   }
 }
 
@@ -127,5 +128,4 @@ window.onmessage = function(e) {
     document.head.appendChild(script);
     script.src = '';
   }
-
 }
